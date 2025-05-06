@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Teste01.Models.Departamento> // o "IEnumerable" diz que e uma coleção de Deparatamento, uma coleção basica e generica, nao vai ter operação para adicionar ou remover, vai somente percorre-la 
+
+@{
+    ViewData["Title"] = "Departamentos";
+}
+
+<h1>Departamentos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>  <!-- aqui esta sendo criado um link (a) que direciona para uma ação (asp-action) "create" do controlador de deparatamentos -->
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id) <!-- essa ação serve para dizer qual dado da model sera exibido aqui, no caso a model Deparatamento -->
+                                                        <!-- "@Html DisplayNameFor" e um ele mento que retorna conteudo html-->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) { <!-- aqui acontece um for em uma coleção, que aqui e a "Model", essa model e o Departamento, que ja e indicado no inicio da pagina-->
+                               <!-- esse foreach percorre a Model chamando cada elemento de "item" -->
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id) <!-- aqui tambem e utilizado um dado da model para ser trabalhado, o "item" aparece devido ao foreach-->
+                                                       <!-- "Html DisplayFor" e um elemento que retorna conteudo html-->
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | <!-- e um elemento que retorna conteudo html-->
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
